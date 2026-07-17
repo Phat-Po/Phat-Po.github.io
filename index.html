@@ -74,6 +74,8 @@
     a.card:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--lemon),6px 6px 0 1px var(--ink)}
     .cover{aspect-ratio:16/10;position:relative;overflow:hidden;border-bottom:1px solid var(--ink)}
     .cover img{width:100%;height:100%;object-fit:cover;display:block}
+    /* text-only covers are shorter, so cards without media don't look too tall */
+    .cover:has(.tc){aspect-ratio:21/10}
     .card.wide{grid-column:1/-1}
     .card.wide .cover{aspect-ratio:21/9}
 
