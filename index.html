@@ -95,6 +95,21 @@
     .card-desc{font-size:.82rem;line-height:1.55;color:var(--gray)}
     .inhouse{position:absolute;right:.7rem;bottom:.6rem;font-family:Menlo,monospace;font-size:.55rem;letter-spacing:.12em;color:var(--gray);text-transform:uppercase}
 
+    /* --- compact mode (demo pending) ---
+       后门开关：卡片 class 加 "mini" 即隐藏封面、缩小尺寸并显示 DEMO COMING SOON。
+       未来某项目有了截图/GIF/视频：
+       1. 去掉该卡片 class 里的 "mini"
+       2. 把 .cover 里的注释占位换成 <img src="assets/xxx.jpg"> 或 .tc 文字封面
+       3. 如需跳转，把 <div class="card"> 换成 <a class="card" href="...">
+       即恢复正常大小卡片。 */
+    .card.mini .cover{display:none}
+    .card.mini{box-shadow:2px 2px 0 var(--ink)}
+    .card.mini .card-body{padding:.7rem .9rem 1.5rem}
+    .card.mini .card-title{font-size:.92rem}
+    .card.mini .card-desc{font-size:.75rem}
+    .card.mini .tag{font-size:.52rem;padding:.15rem .4rem;margin-bottom:.35rem}
+    .card.mini .inhouse{color:var(--ink);background:var(--lemon);padding:.1rem .4rem}
+
     /* --- Footer --- */
     .footer{display:flex;justify-content:space-between;padding-top:1rem;border-top:1px solid var(--rule);font-size:.7rem;font-family:Menlo,monospace;color:var(--gray)}
     .footer a{color:var(--gray);text-decoration:none}
@@ -149,18 +164,14 @@
     <div class="section-label">Projects</div>
     <div class="grid">
 
-      <div class="card wide">
-        <div class="cover"><div class="tc ink">
-          <div class="tc-mono">// 2026.05.16&ndash;17 &middot; SHANGHAI &middot; 2-DAY BUILD WEEKEND</div>
-          <div class="tc-title">This Should Work</div>
-          <div class="tc-mono">Ridiculous, But Functional.</div>
-        </div></div>
+      <a class="card wide" href="http://xhslink.com/o/6jj64rH4gIV" target="_blank" rel="noopener">
+        <div class="cover"><img src="assets/event-cover.jpg" alt="This Should Work 线下 Vibe Coder 交流会现场"></div>
         <div class="card-body">
           <span class="tag">EVENT</span>
           <div class="card-title">This Should Work &middot; 线下 Vibe Coder 交流会</div>
-          <div class="card-desc">A 2-day offline build weekend in Shanghai. Ridiculous ideas, working demos.</div>
+          <div class="card-desc">20 vibe coders, 10+ live demos, 6 hours of non-stop show &amp; tell in Shanghai. Ridiculous ideas, working demos.</div>
         </div>
-      </div>
+      </a>
 
       <a class="card" href="https://github.com/Phat-Po/whisperkey-mac" target="_blank" rel="noopener">
         <div class="cover"><div class="tc lemon">
@@ -174,57 +185,17 @@
         </div>
       </a>
 
-      <div class="card">
-        <div class="cover"><div class="tc ink">
-          <div class="tc-mono">feishu &middot; websocket &middot; tool calling</div>
-          <div class="tc-title">全能飞书 Agent</div>
-        </div></div>
-        <div class="card-body">
-          <span class="tag">AGENT</span>
-          <div class="card-title">全能飞书 Agent 智能体</div>
-          <div class="card-desc">An all-round Feishu AI agent: answers queries, writes daily reports, builds Base tables &amp; docs, and assigns tasks to teammates &mdash; on duty 24/7.</div>
-          <span class="inhouse">in-house</span>
+      <a class="card" href="http://xhslink.com/o/A0xezrUhAPO" target="_blank" rel="noopener">
+        <div class="cover">
+          <img src="assets/idea-ticket-printer.gif" alt="Idea Ticket Printer 现场打印名牌">
+          <div class="play"></div>
         </div>
-      </div>
-
-      <div class="card">
-        <div class="cover"><div class="tc lemon">
-          <div class="tc-mono">speak &rarr; print &middot; old tech, new tricks</div>
-          <div class="tc-title">Idea Ticket Printer</div>
-        </div></div>
         <div class="card-body">
           <span class="tag">TOOL</span>
           <div class="card-title">Idea Ticket Printer</div>
           <div class="card-desc">A cheap old thermal printer revived with vibe coding &mdash; speak or type, and your idea prints instantly as a name tag or post-it card.</div>
-          <span class="inhouse">in-house</span>
         </div>
-      </div>
-
-      <div class="card">
-        <div class="cover"><div class="tc paper">
-          <div class="tc-mono">chrome extension &middot; ecommerce seller console</div>
-          <div class="tc-title">AI Reply Assistant</div>
-        </div></div>
-        <div class="card-body">
-          <span class="tag">EXTENSION</span>
-          <div class="card-title">Ecommerce AI Reply Assistant</div>
-          <div class="card-desc">Generates customer-service replies right inside the seller console &mdash; built for ecommerce sellers, used daily in my own store.</div>
-          <span class="inhouse">in-house</span>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="cover"><div class="tc ink">
-          <div class="tc-mono">scan 100+ folders &rarr; kanban</div>
-          <div class="tc-title">Vibe Project Dashboard</div>
-        </div></div>
-        <div class="card-body">
-          <span class="tag">TOOL</span>
-          <div class="card-title">Vibe Project Dashboard</div>
-          <div class="card-desc">Scans my whole AI-coding workspace and renders a live kanban of every project's health.</div>
-          <span class="inhouse">in-house</span>
-        </div>
-      </div>
+      </a>
 
       <a class="card" href="https://github.com/Phat-Po/ai-thinking-journal" target="_blank" rel="noopener">
         <div class="cover"><div class="tc lemon">
@@ -249,19 +220,6 @@
           <div class="card-desc">CLI that turns 小红书 / Douyin / WeChat links into AI-readable context packs.</div>
         </div>
       </a>
-
-      <div class="card">
-        <div class="cover"><div class="tc paper">
-          <div class="tc-mono">gemini api &middot; batch listing images</div>
-          <div class="tc-title">Main Image Generator</div>
-        </div></div>
-        <div class="card-body">
-          <span class="tag">TOOL</span>
-          <div class="card-title">Ecommerce Main Image Generator</div>
-          <div class="card-desc">Batch-generates platform-compliant ecommerce listing images with Gemini.</div>
-          <span class="inhouse">in-house</span>
-        </div>
-      </div>
 
       <a class="card" href="https://github.com/Phat-Po/agent-handoff-skill" target="_blank" rel="noopener">
         <div class="cover"><div class="tc lemon">
@@ -299,7 +257,61 @@
         </div>
       </a>
 
-      <div class="card">
+      <!-- ===== 以下为紧凑卡（demo pending）。恢复方法见 CSS 里 "compact mode" 注释 ===== -->
+
+      <div class="card mini">
+        <div class="cover"><div class="tc ink">
+          <div class="tc-mono">feishu &middot; websocket &middot; tool calling</div>
+          <div class="tc-title">全能飞书 Agent</div>
+        </div></div>
+        <div class="card-body">
+          <span class="tag">AGENT</span>
+          <div class="card-title">全能飞书 Agent 智能体</div>
+          <div class="card-desc">An all-round Feishu AI agent: answers queries, writes daily reports, builds Base tables &amp; docs, and assigns tasks to teammates &mdash; on duty 24/7.</div>
+          <span class="inhouse">demo coming soon</span>
+        </div>
+      </div>
+
+      <div class="card mini">
+        <div class="cover"><div class="tc paper">
+          <div class="tc-mono">chrome extension &middot; ecommerce seller console</div>
+          <div class="tc-title">AI Reply Assistant</div>
+        </div></div>
+        <div class="card-body">
+          <span class="tag">EXTENSION</span>
+          <div class="card-title">Ecommerce AI Reply Assistant</div>
+          <div class="card-desc">Generates customer-service replies right inside the seller console &mdash; built for ecommerce sellers, used daily in my own store.</div>
+          <span class="inhouse">demo coming soon</span>
+        </div>
+      </div>
+
+      <div class="card mini">
+        <div class="cover"><div class="tc ink">
+          <div class="tc-mono">scan 100+ folders &rarr; kanban</div>
+          <div class="tc-title">Vibe Project Dashboard</div>
+        </div></div>
+        <div class="card-body">
+          <span class="tag">TOOL</span>
+          <div class="card-title">Vibe Project Dashboard</div>
+          <div class="card-desc">Scans my whole AI-coding workspace and renders a live kanban of every project's health.</div>
+          <span class="inhouse">demo coming soon</span>
+        </div>
+      </div>
+
+      <div class="card mini">
+        <div class="cover"><div class="tc paper">
+          <div class="tc-mono">gemini api &middot; batch listing images</div>
+          <div class="tc-title">Main Image Generator</div>
+        </div></div>
+        <div class="card-body">
+          <span class="tag">TOOL</span>
+          <div class="card-title">Ecommerce Main Image Generator</div>
+          <div class="card-desc">Batch-generates platform-compliant ecommerce listing images with Gemini.</div>
+          <span class="inhouse">demo coming soon</span>
+        </div>
+      </div>
+
+      <div class="card mini">
         <div class="cover"><div class="tc lemon">
           <div class="tc-mono">bazi charting &middot; plain-english reading</div>
           <div class="tc-title">Bazi Reading</div>
@@ -308,11 +320,11 @@
           <span class="tag">WEB</span>
           <div class="card-title">Bazi Reading for Westerners</div>
           <div class="card-desc">A mobile-first web tool that casts your Chinese bazi chart and reads it in plain English &mdash; ancient system, modern self-discovery.</div>
-          <span class="inhouse">in-house</span>
+          <span class="inhouse">demo coming soon</span>
         </div>
       </div>
 
-      <div class="card">
+      <div class="card mini">
         <div class="cover"><div class="tc ink">
           <div class="tc-mono">disk &middot; memory &middot; cpu &middot; vpn &middot; ai usage</div>
           <div class="tc-title">MacHealth+</div>
@@ -321,7 +333,7 @@
           <span class="tag">TOOL</span>
           <div class="card-title">MacHealth+</div>
           <div class="card-desc">A background sentinel for macOS &mdash; watches disk, memory, CPU, thermal, VPN traffic &amp; AI usage, and warns you before problems waste your time.</div>
-          <span class="inhouse">in-house</span>
+          <span class="inhouse">demo coming soon</span>
         </div>
       </div>
 
