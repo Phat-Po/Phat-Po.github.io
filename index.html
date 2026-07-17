@@ -8,243 +8,101 @@
     *{margin:0;padding:0;box-sizing:border-box}
 
     :root{
-      --bone:#f5f0e8;
-      --charcoal:#1a1a1a;
-      --green:#2d5a27;
-      --orange:#c4500a;
-      --gray:#6b6b6b;
-      --rule:rgba(26,26,26,.15);
-      --hover-green:#1e3d1a;
+      --bg:#fafaf8;
+      --ink:#0a0a0a;
+      --lemon:#FFD500;
+      --gray:#737373;
+      --card:#ffffff;
+      --rule:rgba(10,10,10,.12);
     }
 
     body{
-      background:var(--bone);
-      color:var(--charcoal);
-      font-family:Georgia,'Noto Serif SC','Songti SC',serif;
+      background:var(--bg);
+      color:var(--ink);
+      font-family:'Helvetica Neue',Helvetica,'PingFang SC',Arial,sans-serif;
       min-height:100vh;
-      padding:0;
-      position:relative;
     }
+    .page{max-width:760px;margin:0 auto;padding:clamp(3rem,8vw,5rem) clamp(1.5rem,5vw,2.5rem)}
 
-    /* --- Parchment texture overlay --- */
-    body::before{
-      content:'';
-      position:fixed;
-      inset:0;
-      background:url('parchment.jpg') center/cover no-repeat;
-      opacity:.35;
-      z-index:0;
-      pointer-events:none;
-    }
-    body::after{
-      content:'';
-      position:fixed;
-      inset:0;
-      background:rgba(245,240,232,.6);
-      z-index:0;
-      pointer-events:none;
-    }
-
-    /* --- Layout --- */
-    .page{
-      position:relative;
-      z-index:1;
-      max-width:680px;
-      margin:0 auto;
-      padding:clamp(3rem,8vw,6rem) clamp(1.5rem,5vw,2.5rem);
-    }
-
-    /* --- Header with avatar --- */
-    .header{
-      display:flex;
-      align-items:center;
-      gap:1.5rem;
-      padding-bottom:1.5rem;
-      border-bottom:2px solid var(--charcoal);
-      margin-bottom:2.5rem;
-    }
+    /* --- Header --- */
+    .header{display:flex;align-items:center;gap:1.5rem;padding-bottom:1.5rem;border-bottom:3px solid var(--ink);margin-bottom:2.5rem}
     .avatar{
-      width:72px;height:72px;
-      flex-shrink:0;
-      border-radius:50%;
-      overflow:hidden;
-      border:2px solid var(--charcoal);
-      background:var(--bone);
+      width:76px;height:76px;flex-shrink:0;border-radius:50%;
+      border:2px solid var(--ink);
+      background:var(--lemon);color:var(--ink);
+      display:flex;align-items:center;justify-content:center;
+      font-weight:800;font-size:1.5rem;letter-spacing:-.02em;
     }
-    .avatar svg{display:block}
-    .header-text{flex:1;min-width:0}
-    .header-name{
-      font-size:clamp(1.6rem,4vw,2.4rem);
-      font-weight:700;
-      letter-spacing:-.03em;
-      line-height:1.1;
-      margin-bottom:.25rem;
-    }
-    .header-tag{
-      font-size:.75rem;
-      font-family:Menlo,Consolas,monospace;
-      color:var(--gray);
-      letter-spacing:.05em;
-      text-transform:uppercase;
-    }
+    .header-name{font-size:clamp(1.8rem,4vw,2.6rem);font-weight:800;letter-spacing:-.03em;line-height:1.05;margin-bottom:.35rem}
+    .header-tag{font-size:clamp(.85rem,2vw,1rem);font-weight:700;letter-spacing:.02em;text-transform:uppercase;line-height:1.4}
+    .header-tag b{background:var(--lemon);padding:0 .35rem;font-weight:800}
 
     /* --- Bio --- */
-    .bio{
-      font-size:clamp(1rem,2.5vw,1.15rem);
-      line-height:1.75;
-      color:var(--charcoal);
-      max-width:540px;
-      margin-bottom:3rem;
-      font-style:italic;
-    }
-    .bio em{
-      font-style:normal;
-      color:var(--green);
-      font-weight:600;
-    }
+    .bio{font-size:clamp(.98rem,2.5vw,1.12rem);line-height:1.8;max-width:600px;margin-bottom:3rem}
+    .bio em{font-style:normal;font-weight:700;box-shadow:inset 0 -0.45em var(--lemon)}
+    .bio .stat{font-weight:800}
 
-    /* --- Section label --- */
-    .section-label{
-      font-family:Menlo,Consolas,monospace;
-      font-size:.7rem;
-      letter-spacing:.12em;
-      text-transform:uppercase;
-      color:var(--gray);
-      margin-bottom:1rem;
-    }
+    .section-label{font-family:Menlo,Consolas,monospace;font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gray);margin-bottom:1.2rem}
 
     /* --- Links --- */
-    .links{
-      display:flex;
-      flex-direction:column;
-      gap:0;
-      margin-bottom:3rem;
-    }
+    .links{display:flex;flex-direction:column;margin-bottom:3rem}
     .link{
-      display:flex;
-      justify-content:space-between;
-      align-items:baseline;
-      padding:1rem 0;
-      border-bottom:1px solid var(--rule);
-      text-decoration:none;
-      color:var(--charcoal);
-      transition:color .2s,padding-left .2s;
+      display:flex;justify-content:space-between;align-items:center;gap:1rem;
+      padding:1rem 0;border-bottom:1px solid var(--rule);
+      text-decoration:none;color:var(--ink);
+      transition:background .15s,padding .15s;
     }
     .link:first-child{border-top:1px solid var(--rule)}
-    .link:hover{
-      color:var(--green);
-      padding-left:.5rem;
-    }
-    .link-left{display:flex;flex-direction:column;gap:.15rem}
-    .link-name{
-      font-size:1.1rem;
-      font-weight:700;
-      letter-spacing:-.01em;
-    }
-    .link-desc{
-      font-size:.8rem;
-      color:var(--gray);
-      font-family:Menlo,Consolas,monospace;
-    }
-    .link-arrow{
-      font-size:1.3rem;
-      color:var(--rule);
-      transition:color .2s;
-      flex-shrink:0;
-    }
-    .link:hover .link-arrow{color:var(--green)}
+    .link:hover{background:var(--lemon);padding-left:.7rem;padding-right:.7rem}
+    .link-desc{font-size:.78rem;color:var(--gray);font-family:Menlo,monospace}
+    .link:hover .link-desc{color:var(--ink)}
+    .link-right{display:flex;align-items:center;gap:.6rem;flex-shrink:0}
+    .link-logo{width:22px;height:22px;display:block}
+    .link-name{font-size:1.05rem;font-weight:700}
+    .link-arrow{font-size:1.2rem}
 
-    /* --- Event block --- */
-    .event{
-      background:var(--charcoal);
-      color:var(--bone);
-      padding:clamp(1.5rem,4vw,2.5rem);
-      margin-bottom:3rem;
+    /* --- Projects grid --- */
+    .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.4rem;margin-bottom:3.5rem}
+    @media(max-width:600px){.grid{grid-template-columns:1fr}}
+    .card{
+      display:block;background:var(--card);border:1px solid var(--ink);
+      text-decoration:none;color:var(--ink);
+      box-shadow:3px 3px 0 var(--ink);
       position:relative;
     }
-    .event::before{
-      content:'UPCOMING';
-      position:absolute;
-      top:-.6rem;
-      left:1.5rem;
-      background:var(--orange);
-      color:var(--bone);
-      font-family:Menlo,Consolas,monospace;
-      font-size:.6rem;
-      letter-spacing:.15em;
-      padding:.2rem .6rem;
-    }
-    .event-name{
-      font-size:clamp(1.3rem,3.5vw,1.8rem);
-      font-weight:700;
-      letter-spacing:-.02em;
-      margin-bottom:.3rem;
-    }
-    .event-sub{
-      font-size:.85rem;
-      color:#a0a0a0;
-      margin-bottom:1rem;
-      font-style:italic;
-    }
-    .event-meta{
-      display:flex;
-      flex-wrap:wrap;
-      gap:.6rem 1.5rem;
-      font-family:Menlo,Consolas,monospace;
-      font-size:.72rem;
-      color:#888;
-      margin-bottom:1.2rem;
-    }
-    .event-meta span::before{
-      content:'//';
-      color:var(--orange);
-      margin-right:.3rem;
-    }
-    .event-link{
-      display:inline-block;
-      color:var(--bone);
-      text-decoration:none;
-      font-family:Menlo,Consolas,monospace;
-      font-size:.8rem;
-      border:1px solid #555;
-      padding:.5rem 1.2rem;
-      transition:all .2s;
-    }
-    .event-link:hover{
-      background:var(--bone);
-      color:var(--charcoal);
-      border-color:var(--bone);
-    }
+    a.card{transition:transform .15s,box-shadow .15s}
+    a.card:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--lemon),6px 6px 0 1px var(--ink)}
+    .cover{aspect-ratio:16/10;position:relative;overflow:hidden;border-bottom:1px solid var(--ink)}
+    .cover img{width:100%;height:100%;object-fit:cover;display:block}
+    .card.wide{grid-column:1/-1}
+    .card.wide .cover{aspect-ratio:21/9}
+
+    /* text-cover fallback (used until a project has a real image/GIF) */
+    .tc{width:100%;height:100%;display:flex;flex-direction:column;justify-content:center;padding:1.2rem;gap:.4rem}
+    .tc-mono{font-family:Menlo,Consolas,monospace;font-size:.62rem;letter-spacing:.08em;opacity:.6}
+    .tc-title{font-size:clamp(1.2rem,3vw,1.7rem);font-weight:800;letter-spacing:-.02em;line-height:1.15}
+    .tc.ink{background:var(--ink);color:var(--bg)}
+    .tc.lemon{background:var(--lemon);color:var(--ink)}
+    .tc.paper{background:#f0f0ee;color:var(--ink)}
+
+    /* play badge — add inside .cover when a card links to a video */
+    .play{position:absolute;right:.7rem;bottom:.7rem;width:34px;height:34px;border-radius:50%;background:rgba(10,10,10,.8);display:flex;align-items:center;justify-content:center}
+    .play::after{content:'';border-style:solid;border-width:6px 0 6px 10px;border-color:transparent transparent transparent var(--lemon);margin-left:2px}
+
+    .card-body{padding:.9rem 1rem 1.1rem}
+    .tag{display:inline-block;font-family:Menlo,Consolas,monospace;font-size:.58rem;letter-spacing:.14em;padding:.2rem .5rem;margin-bottom:.5rem;background:var(--lemon);color:var(--ink);font-weight:700}
+    .card-title{font-size:1.05rem;font-weight:800;margin-bottom:.3rem}
+    .card-desc{font-size:.82rem;line-height:1.55;color:var(--gray)}
+    .inhouse{position:absolute;right:.7rem;bottom:.6rem;font-family:Menlo,monospace;font-size:.55rem;letter-spacing:.12em;color:var(--gray);text-transform:uppercase}
 
     /* --- Footer --- */
-    .footer{
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      padding-top:1rem;
-      border-top:1px solid var(--rule);
-      font-size:.7rem;
-      font-family:Menlo,Consolas,monospace;
-      color:var(--gray);
-    }
-    .footer a{
-      color:var(--gray);
-      text-decoration:none;
-    }
-    .footer a:hover{color:var(--green)}
+    .footer{display:flex;justify-content:space-between;padding-top:1rem;border-top:1px solid var(--rule);font-size:.7rem;font-family:Menlo,monospace;color:var(--gray)}
+    .footer a{color:var(--gray);text-decoration:none}
+    .footer a:hover{color:var(--ink)}
 
-    /* --- Responsive --- */
     @media(max-width:480px){
       .header{flex-direction:column;text-align:center}
-      .header-text{text-align:center}
-      .event-meta{flex-direction:column;gap:.4rem}
       .footer{flex-direction:column;gap:.3rem;text-align:center}
-    }
-
-    /* --- Print --- */
-    @media print{
-      body::before,body::after{display:none}
-      .event{background:#1a1a1a;-webkit-print-color-adjust:exact;print-color-adjust:exact}
     }
   </style>
 </head>
@@ -252,79 +110,221 @@
   <div class="page">
 
     <header class="header">
-      <div class="avatar">
-        <svg viewBox="0 0 72 72" xmlns="http://www.w3.org/2000/svg">
-          <!-- Background -->
-          <circle cx="36" cy="36" r="36" fill="#f5f0e8"/>
-          <!-- Face -->
-          <circle cx="36" cy="34" r="18" fill="#e8ddd0"/>
-          <!-- Hair / beanie -->
-          <path d="M18 30c0-10 8-18 18-18s18 8 18 18c0 2-1 3-3 3H21c-2 0-3-1-3-3z" fill="#2d5a27"/>
-          <rect x="18" y="29" width="36" height="4" rx="2" fill="#2d5a27"/>
-          <line x1="18" y1="31" x2="54" y2="31" stroke="#1e3d1a" stroke-width="1.5"/>
-          <!-- Beanie fold line -->
-          <path d="M20 26c4-2 10-3 16-3s12 1 16 3" fill="none" stroke="#1e3d1a" stroke-width="1" opacity=".4"/>
-          <!-- Eyes -->
-          <circle cx="29" cy="37" r="2.5" fill="#1a1a1a"/>
-          <circle cx="43" cy="37" r="2.5" fill="#1a1a1a"/>
-          <!-- Eye shine -->
-          <circle cx="30" cy="36" r=".8" fill="#f5f0e8"/>
-          <circle cx="44" cy="36" r=".8" fill="#f5f0e8"/>
-          <!-- Glasses -->
-          <rect x="24" y="33" width="10" height="8" rx="2" fill="none" stroke="#1a1a1a" stroke-width="1.2"/>
-          <rect x="38" y="33" width="10" height="8" rx="2" fill="none" stroke="#1a1a1a" stroke-width="1.2"/>
-          <line x1="34" y1="37" x2="38" y2="37" stroke="#1a1a1a" stroke-width="1.2"/>
-          <line x1="24" y1="37" x2="21" y2="35" stroke="#1a1a1a" stroke-width="1"/>
-          <line x1="48" y1="37" x2="51" y2="35" stroke="#1a1a1a" stroke-width="1"/>
-          <!-- Nose -->
-          <path d="M35 41c0 1.5 1 2.5 2 2.5s2-1 2-2.5" fill="none" stroke="#c4a882" stroke-width="1" stroke-linecap="round"/>
-          <!-- Smile -->
-          <path d="M30 46c2 3 10 3 12 0" fill="none" stroke="#1a1a1a" stroke-width="1.2" stroke-linecap="round"/>
-          <!-- Shoulders / shirt collar -->
-          <path d="M16 62c0-8 9-14 20-14s20 6 20 14" fill="#c4500a"/>
-          <path d="M32 50l4 4 4-4" fill="none" stroke="#f5f0e8" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
-          <!-- Code bracket on shirt -->
-          <text x="36" y="60" text-anchor="middle" font-family="Menlo,monospace" font-size="6" fill="#f5f0e8" opacity=".6">&lt;/&gt;</text>
-        </svg>
-      </div>
+      <div class="avatar">PL</div>
       <div class="header-text">
         <div class="header-name">Pohan Lee</div>
-        <div class="header-tag">builder &amp; operator</div>
+        <div class="header-tag">one-man ecommerce company <b>&times;</b> ai toolmaker</div>
       </div>
     </header>
 
     <p class="bio">
-      Solo ecommerce operator who codes (with AI). Building tools I actually use — <em>automation</em>, <em>AI reply assistants</em>, <em>thermal printer hacks</em>. Organizing hackathons under <em>"This Should Work / 野生产品部"</em>. Everything ships. Nothing is theoretical.
+      I run a cross-border ecommerce business &mdash; <em>solo</em>. What used to take a team of five,
+      I ship with an AI toolchain I built myself: customer-service copilots, listing automation,
+      a Feishu agent that runs daily ops while I sleep. <span class="stat">100+ projects</span> in the
+      workshop, the best of them below. I also host build weekends under
+      <em>"This Should Work / 野生产品部"</em>. Everything here runs a real business.
+      Nothing is theoretical.
     </p>
 
     <div class="section-label">Where to find me</div>
     <nav class="links">
       <a class="link" href="https://github.com/Phat-Po" target="_blank" rel="noopener">
-        <div class="link-left">
-          <div class="link-name">GitHub</div>
-          <div class="link-desc">open source &amp; experiments</div>
-        </div>
-        <div class="link-arrow">&rarr;</div>
+        <span class="link-desc">open source &amp; experiments</span>
+        <span class="link-right">
+          <svg class="link-logo" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
+          <span class="link-name">GitHub</span>
+          <span class="link-arrow">&rarr;</span>
+        </span>
       </a>
       <a class="link" href="https://www.xiaohongshu.com/user/profile/631af8e4000000002303fa6d" target="_blank" rel="noopener">
-        <div class="link-left">
-          <div class="link-name">小红书</div>
-          <div class="link-desc">daily builds &amp; vibe coding life</div>
-        </div>
-        <div class="link-arrow">&rarr;</div>
+        <span class="link-desc">daily builds &amp; vibe coding life</span>
+        <span class="link-right">
+          <svg class="link-logo" viewBox="0 0 24 24"><rect width="24" height="24" rx="6" fill="#ff2442"/><text x="12" y="16.2" text-anchor="middle" font-family="PingFang SC,sans-serif" font-size="10" font-weight="700" fill="#fff">红</text></svg>
+          <span class="link-name">小红书</span>
+          <span class="link-arrow">&rarr;</span>
+        </span>
       </a>
     </nav>
 
-    <div class="section-label">Event</div>
-    <div class="event">
-      <div class="event-name">This Should Work</div>
-      <div class="event-sub">Ridiculous, But Functional.</div>
-      <div class="event-meta">
-        <span>2026.05.16&ndash;17</span>
-        <span>Shanghai</span>
-        <span>2-day offline build weekend</span>
+    <div class="section-label">Projects</div>
+    <div class="grid">
+
+      <div class="card wide">
+        <div class="cover"><div class="tc ink">
+          <div class="tc-mono">// 2026.05.16&ndash;17 &middot; SHANGHAI &middot; 2-DAY BUILD WEEKEND</div>
+          <div class="tc-title">This Should Work</div>
+          <div class="tc-mono">Ridiculous, But Functional.</div>
+        </div></div>
+        <div class="card-body">
+          <span class="tag">EVENT</span>
+          <div class="card-title">This Should Work &middot; 线下 Vibe Coder 交流会</div>
+          <div class="card-desc">A 2-day offline build weekend in Shanghai. Ridiculous ideas, working demos.</div>
+        </div>
       </div>
-      <a class="event-link" href="https://eyhshen.github.io/this-should-work/" target="_blank" rel="noopener">View event page &rarr;</a>
+
+      <a class="card" href="https://github.com/Phat-Po/whisperkey-mac" target="_blank" rel="noopener">
+        <div class="cover"><div class="tc lemon">
+          <div class="tc-mono">$ hold &#8997; &rarr; speak &rarr; paste</div>
+          <div class="tc-title">WhisperKey</div>
+        </div></div>
+        <div class="card-body">
+          <span class="tag">TOOL</span>
+          <div class="card-title">WhisperKey Mac</div>
+          <div class="card-desc">Offline voice-to-text for macOS. Hold a key, speak, release &mdash; text pasted.</div>
+        </div>
+      </a>
+
+      <div class="card">
+        <div class="cover"><div class="tc ink">
+          <div class="tc-mono">feishu &middot; websocket &middot; tool calling</div>
+          <div class="tc-title">全能飞书 Agent</div>
+        </div></div>
+        <div class="card-body">
+          <span class="tag">AGENT</span>
+          <div class="card-title">全能飞书 Agent 智能体</div>
+          <div class="card-desc">An all-round Feishu AI agent: answers queries, writes daily reports, builds Base tables &amp; docs, and assigns tasks to teammates &mdash; on duty 24/7.</div>
+          <span class="inhouse">in-house</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="cover"><div class="tc lemon">
+          <div class="tc-mono">speak &rarr; print &middot; old tech, new tricks</div>
+          <div class="tc-title">Idea Ticket Printer</div>
+        </div></div>
+        <div class="card-body">
+          <span class="tag">TOOL</span>
+          <div class="card-title">Idea Ticket Printer</div>
+          <div class="card-desc">A cheap old thermal printer revived with vibe coding &mdash; speak or type, and your idea prints instantly as a name tag or post-it card.</div>
+          <span class="inhouse">in-house</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="cover"><div class="tc paper">
+          <div class="tc-mono">chrome extension &middot; ecommerce seller console</div>
+          <div class="tc-title">AI Reply Assistant</div>
+        </div></div>
+        <div class="card-body">
+          <span class="tag">EXTENSION</span>
+          <div class="card-title">Ecommerce AI Reply Assistant</div>
+          <div class="card-desc">Generates customer-service replies right inside the seller console &mdash; built for ecommerce sellers, used daily in my own store.</div>
+          <span class="inhouse">in-house</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="cover"><div class="tc ink">
+          <div class="tc-mono">scan 100+ folders &rarr; kanban</div>
+          <div class="tc-title">Vibe Project Dashboard</div>
+        </div></div>
+        <div class="card-body">
+          <span class="tag">TOOL</span>
+          <div class="card-title">Vibe Project Dashboard</div>
+          <div class="card-desc">Scans my whole AI-coding workspace and renders a live kanban of every project's health.</div>
+          <span class="inhouse">in-house</span>
+        </div>
+      </div>
+
+      <a class="card" href="https://github.com/Phat-Po/ai-thinking-journal" target="_blank" rel="noopener">
+        <div class="cover"><div class="tc lemon">
+          <div class="tc-mono">ai coding sessions &rarr; daily journal</div>
+          <div class="tc-title">AI Thinking Journal</div>
+        </div></div>
+        <div class="card-body">
+          <span class="tag">TOOL</span>
+          <div class="card-title">Daily Thinking Summary</div>
+          <div class="card-desc">Automatically distills every day's AI-assisted work into a written thinking journal.</div>
+        </div>
+      </a>
+
+      <a class="card" href="https://github.com/Phat-Po/link-grabber" target="_blank" rel="noopener">
+        <div class="cover"><div class="tc ink">
+          <div class="tc-mono">$ grab &lt;url&gt; &rarr; context.md</div>
+          <div class="tc-title">Link Grabber</div>
+        </div></div>
+        <div class="card-body">
+          <span class="tag">TOOL</span>
+          <div class="card-title">Link Grabber</div>
+          <div class="card-desc">CLI that turns 小红书 / Douyin / WeChat links into AI-readable context packs.</div>
+        </div>
+      </a>
+
+      <div class="card">
+        <div class="cover"><div class="tc paper">
+          <div class="tc-mono">gemini api &middot; batch listing images</div>
+          <div class="tc-title">Main Image Generator</div>
+        </div></div>
+        <div class="card-body">
+          <span class="tag">TOOL</span>
+          <div class="card-title">Ecommerce Main Image Generator</div>
+          <div class="card-desc">Batch-generates platform-compliant ecommerce listing images with Gemini.</div>
+          <span class="inhouse">in-house</span>
+        </div>
+      </div>
+
+      <a class="card" href="https://github.com/Phat-Po/agent-handoff-skill" target="_blank" rel="noopener">
+        <div class="cover"><div class="tc lemon">
+          <div class="tc-mono">claude code &#8646; codex &middot; STATUS.md</div>
+          <div class="tc-title">Agent Handoff Skill</div>
+        </div></div>
+        <div class="card-body">
+          <span class="tag">SKILL</span>
+          <div class="card-title">Agent Handoff Skill</div>
+          <div class="card-desc">Cross-tool handoff skill for Claude Code &amp; Codex &mdash; minimal-token context passing between agents.</div>
+        </div>
+      </a>
+
+      <a class="card" href="https://github.com/Phat-Po/20260324__extension__wechat-article-summary" target="_blank" rel="noopener">
+        <div class="cover"><div class="tc ink">
+          <div class="tc-mono">wechat &rarr; obsidian &middot; ai summary &middot; search</div>
+          <div class="tc-title">Article Vault</div>
+        </div></div>
+        <div class="card-body">
+          <span class="tag">EXTENSION</span>
+          <div class="card-title">WeChat Article Vault</div>
+          <div class="card-desc">A personal knowledge vault for WeChat articles &mdash; one-key save to Obsidian with AI summaries, sync &amp; digest. More library than bookmark.</div>
+        </div>
+      </a>
+
+      <a class="card" href="https://github.com/Phat-Po/reddit-summarizer" target="_blank" rel="noopener">
+        <div class="cover"><div class="tc paper">
+          <div class="tc-mono">TL;DR any thread &middot; streaming</div>
+          <div class="tc-title">Reddit Summarizer</div>
+        </div></div>
+        <div class="card-body">
+          <span class="tag">EXTENSION</span>
+          <div class="card-title">Reddit Summarizer</div>
+          <div class="card-desc">Chrome extension that AI-summarizes Reddit posts and comment threads in real time.</div>
+        </div>
+      </a>
+
+      <div class="card">
+        <div class="cover"><div class="tc lemon">
+          <div class="tc-mono">bazi charting &middot; plain-english reading</div>
+          <div class="tc-title">Bazi Reading</div>
+        </div></div>
+        <div class="card-body">
+          <span class="tag">WEB</span>
+          <div class="card-title">Bazi Reading for Westerners</div>
+          <div class="card-desc">A mobile-first web tool that casts your Chinese bazi chart and reads it in plain English &mdash; ancient system, modern self-discovery.</div>
+          <span class="inhouse">in-house</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="cover"><div class="tc ink">
+          <div class="tc-mono">disk &middot; memory &middot; cpu &middot; vpn &middot; ai usage</div>
+          <div class="tc-title">MacHealth+</div>
+        </div></div>
+        <div class="card-body">
+          <span class="tag">TOOL</span>
+          <div class="card-title">MacHealth+</div>
+          <div class="card-desc">A background sentinel for macOS &mdash; watches disk, memory, CPU, thermal, VPN traffic &amp; AI usage, and warns you before problems waste your time.</div>
+          <span class="inhouse">in-house</span>
+        </div>
+      </div>
+
     </div>
 
     <footer class="footer">
