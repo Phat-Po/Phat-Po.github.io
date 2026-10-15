@@ -4,180 +4,300 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Pohan Lee</title>
+  <!-- 样稿 B：大字海报 + 热敏小票自我介绍 + 拼贴布局 + 打字动效。图片路径指向 assets/ -->
   <style>
     *{margin:0;padding:0;box-sizing:border-box}
-
     :root{
-      --bg:#fafaf8;
-      --ink:#0a0a0a;
-      --lemon:#FFD500;
-      --gray:#737373;
-      --card:#ffffff;
+      --bg:#fafaf8;--ink:#0a0a0a;--lemon:#FFD500;--gray:#737373;--card:#fff;
       --rule:rgba(10,10,10,.12);
+      --mono:Menlo,Consolas,'PingFang SC',monospace;
     }
+    body{background:var(--bg);color:var(--ink);font-family:'Helvetica Neue',Helvetica,'PingFang SC',Arial,sans-serif;overflow-x:hidden}
+    .page{max-width:1120px;margin:0 auto;padding:clamp(1.5rem,4vw,2.5rem) clamp(1.2rem,4vw,2.5rem) 3rem}
+    .mono{font-family:var(--mono)}
 
-    body{
-      background:var(--bg);
-      color:var(--ink);
-      font-family:'Helvetica Neue',Helvetica,'PingFang SC',Arial,sans-serif;
-      min-height:100vh;
-    }
-    .page{max-width:760px;margin:0 auto;padding:clamp(3rem,8vw,5rem) clamp(1.5rem,5vw,2.5rem)}
+    /* ---------- Hero ---------- */
+    .topbar{display:flex;justify-content:space-between;font-family:var(--mono);font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;padding-bottom:.8rem;border-bottom:1px solid var(--ink)}
+    .topbar .dot{display:inline-block;width:.55rem;height:.55rem;border-radius:50%;background:#1fbf4a;margin-right:.45rem;animation:blink 1.6s infinite}
+    @keyframes blink{50%{opacity:.25}}
 
-    /* --- Header --- */
-    .header{display:flex;align-items:center;gap:1.5rem;padding-bottom:1.5rem;border-bottom:3px solid var(--ink);margin-bottom:2.5rem}
-    .avatar{
-      width:76px;height:76px;flex-shrink:0;border-radius:50%;
-      border:2px solid var(--ink);
-      background:var(--lemon);color:var(--ink);
-      display:flex;align-items:center;justify-content:center;
-      font-weight:800;font-size:1.5rem;letter-spacing:-.02em;
-    }
-    .header-name{font-size:clamp(1.8rem,4vw,2.6rem);font-weight:800;letter-spacing:-.03em;line-height:1.05;margin-bottom:.35rem}
-    .header-tag{font-size:clamp(.85rem,2vw,1rem);font-weight:700;letter-spacing:.02em;text-transform:uppercase;line-height:1.4}
-    .header-tag b{background:var(--lemon);padding:0 .35rem;font-weight:800}
+    .hero{display:grid;grid-template-columns:1fr auto;align-items:end;gap:1.5rem;padding:clamp(1.5rem,4vw,3rem) 0 1.2rem}
+    .name{font-size:clamp(3.4rem,13.5vw,10.5rem);font-weight:800;letter-spacing:-.055em;line-height:.82;text-transform:uppercase}
+    .name span{display:block}
+    .name .l2{padding-left:.6em}
+    .name .l2::after{content:'';display:inline-block;width:.16em;height:.16em;background:var(--lemon);margin-left:.06em;border:.03em solid var(--ink)}
+    .avatar{width:clamp(110px,16vw,190px);aspect-ratio:1;border-radius:50%;border:3px solid var(--ink);box-shadow:6px 6px 0 var(--ink);overflow:hidden;transform:rotate(-4deg);transition:transform .3s}
+    .avatar:hover{transform:rotate(4deg) scale(1.04)}
+    .avatar svg{display:block;width:100%;height:100%}
 
-    /* --- Bio --- */
-    .bio{font-size:clamp(.98rem,2.5vw,1.12rem);line-height:1.8;max-width:600px;margin-bottom:3rem}
-    .bio em{font-style:normal;font-weight:700;box-shadow:inset 0 -0.45em var(--lemon)}
-    .bio .stat{font-weight:800}
+    .tagline{font-size:clamp(1.1rem,3vw,1.9rem);font-weight:800;letter-spacing:-.02em;text-transform:uppercase;line-height:1.2;padding:1rem 0 1.6rem;border-bottom:3px solid var(--ink)}
+    .tagline mark{background:var(--lemon);color:var(--ink);padding:0 .3em;box-decoration-break:clone;-webkit-box-decoration-break:clone}
 
-    .section-label{font-family:Menlo,Consolas,monospace;font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gray);margin-bottom:1.2rem}
+    .stats{display:grid;grid-template-columns:repeat(3,1fr);border-bottom:1px solid var(--ink);margin-bottom:clamp(2.5rem,6vw,4.5rem)}
+    .stat{padding:1.1rem 1rem 1.1rem 0}
+    .stat+.stat{border-left:1px solid var(--ink);padding-left:1rem}
+    .stat-num{font-size:clamp(2rem,6vw,4rem);font-weight:800;letter-spacing:-.04em;line-height:1}
+    .stat-lbl{font-family:var(--mono);font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--gray);margin-top:.4rem}
 
-    /* --- Links --- */
-    .links{display:flex;flex-direction:column;margin-bottom:3rem}
-    .link{
-      display:flex;justify-content:space-between;align-items:center;gap:1rem;
-      padding:1rem 0;border-bottom:1px solid var(--rule);
-      text-decoration:none;color:var(--ink);
-      transition:background .15s,padding .15s;
-    }
-    .link:first-child{border-top:1px solid var(--rule)}
-    .link:hover{background:var(--lemon);padding-left:.7rem;padding-right:.7rem}
-    .link-desc{font-size:.78rem;color:var(--gray);font-family:Menlo,monospace}
+    .section-label{font-family:var(--mono);font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gray);margin-bottom:1.2rem;display:flex;align-items:center;gap:.7rem}
+    .section-label::after{content:'';flex:1;height:1px;background:var(--rule)}
+
+    /* ---------- Receipt + links ---------- */
+    .about{display:grid;grid-template-columns:minmax(0,420px) minmax(0,1fr);gap:clamp(2rem,5vw,4.5rem);align-items:start;margin-bottom:clamp(3rem,7vw,5rem)}
+    .printer{position:relative;padding-top:14px}
+    /* printer mouth the receipt comes out of */
+    .printer::before{content:'';position:absolute;top:0;left:-14px;right:-14px;height:18px;background:var(--ink);border-radius:6px;z-index:2}
+    .printer::after{content:'';position:absolute;top:7px;left:8px;right:8px;height:4px;background:#333;border-radius:2px;z-index:3}
+    .receipt-wrap{filter:drop-shadow(1px 0 0 var(--ink)) drop-shadow(-1px 0 0 var(--ink)) drop-shadow(0 1px 0 var(--ink)) drop-shadow(6px 6px 0 var(--lemon))}
+    .receipt{position:relative;background:var(--card);padding:1.6rem 1.4rem 1.4rem;font-family:var(--mono);font-size:.78rem;line-height:1.7;margin-bottom:10px}
+    .receipt::after{content:'';position:absolute;left:0;right:0;bottom:-10px;height:10px;background:conic-gradient(from -45deg at bottom,var(--card) 90deg,transparent 0) 0 0/20px 100%}
+    .r-line{opacity:0;transform:translateY(-8px);transition:opacity .25s,transform .25s}
+    .r-line.on{opacity:1;transform:none}
+    .r-center{text-align:center}
+    .r-title{font-size:1.05rem;font-weight:700;letter-spacing:.06em}
+    .r-sep{border-top:1px dashed var(--ink);margin:.7rem 0}
+    .r-row{display:flex;gap:.4rem}
+    .r-row .k{flex-shrink:0}
+    .r-row .fill{flex:1 1 0;width:0;overflow:hidden;white-space:nowrap;color:var(--gray)}
+    .r-row .fill::before{content:'..........................................................'}
+    .r-row .v{flex-shrink:0;font-weight:700}
+    .r-total{font-size:.95rem;font-weight:700}
+    .r-total .v{background:var(--lemon);padding:0 .3rem}
+    .r-note{color:#333}
+    .r-note b{background:var(--lemon);font-weight:700;padding:0 .2rem}
+    .barcode{height:42px;margin:.8rem 0 .3rem;background:repeating-linear-gradient(90deg,var(--ink) 0 2px,transparent 2px 4px,var(--ink) 4px 5px,transparent 5px 8px,var(--ink) 8px 11px,transparent 11px 13px)}
+
+    .links{display:flex;flex-direction:column;margin-bottom:2rem}
+    .link{display:flex;justify-content:space-between;align-items:center;gap:1rem;padding:1.3rem 0;border-bottom:1px solid var(--ink);text-decoration:none;color:var(--ink);transition:background .15s,padding .15s}
+    .link:first-child{border-top:1px solid var(--ink)}
+    .link:hover{background:var(--lemon);padding-left:.9rem;padding-right:.9rem}
+    .link-left{display:flex;align-items:center;gap:.9rem}
+    .link-logo{width:30px;height:30px;display:block}
+    .link-name{font-size:clamp(1.4rem,3vw,2rem);font-weight:800;letter-spacing:-.03em}
+    .link-desc{font-family:var(--mono);font-size:.72rem;color:var(--gray)}
     .link:hover .link-desc{color:var(--ink)}
-    .link-right{display:flex;align-items:center;gap:.6rem;flex-shrink:0}
-    .link-logo{width:22px;height:22px;display:block}
-    .link-name{font-size:1.05rem;font-weight:700}
-    .link-arrow{font-size:1.2rem}
+    .link-arrow{font-size:1.6rem;transition:transform .2s}
+    .link:hover .link-arrow{transform:translateX(4px) rotate(-45deg)}
+    .pitch{font-size:clamp(1rem,2vw,1.15rem);line-height:1.75}
+    .pitch em{font-style:normal;font-weight:700;background:linear-gradient(var(--lemon),var(--lemon)) 0 85%/0% 45% no-repeat;transition:background-size .8s .2s}
+    .in .pitch em,.pitch.in em{background-size:100% 45%}
 
-    /* --- Projects grid --- */
-    .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.4rem;margin-bottom:3.5rem}
-    @media(max-width:600px){.grid{grid-template-columns:1fr}}
-    .card{
-      display:block;background:var(--card);border:1px solid var(--ink);
-      text-decoration:none;color:var(--ink);
-      box-shadow:3px 3px 0 var(--ink);
-      position:relative;
-    }
-    a.card{transition:transform .15s,box-shadow .15s}
-    a.card:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--lemon),6px 6px 0 1px var(--ink)}
-    .cover{aspect-ratio:16/10;position:relative;overflow:hidden;border-bottom:1px solid var(--ink)}
-    .cover img{width:100%;height:100%;object-fit:cover;display:block}
-    /* text-only covers are shorter, so cards without media don't look too tall */
-    .cover:has(.tc){aspect-ratio:21/10}
-    .card.wide{grid-column:1/-1}
-    .card.wide .cover{aspect-ratio:21/9}
+    /* ---------- Bento grid ---------- */
+    .grid{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:1.4rem;margin-bottom:clamp(3rem,7vw,5rem)}
+    .card{display:flex;flex-direction:column;background:var(--card);border:1.5px solid var(--ink);text-decoration:none;color:var(--ink);box-shadow:4px 4px 0 var(--ink);position:relative;transition:transform .15s,box-shadow .15s}
+    .card:hover{transform:translate(-3px,-3px);box-shadow:8px 8px 0 var(--lemon),8px 8px 0 1.5px var(--ink)}
+    .s2{grid-column:span 2}.s3{grid-column:span 3}.s4{grid-column:span 4}.s6{grid-column:span 6}
+    .cover{position:relative;overflow:hidden;border-bottom:1.5px solid var(--ink);flex:1;min-height:200px}
+    .cover img{width:100%;height:100%;object-fit:cover;display:block;position:absolute;inset:0;transition:transform .5s}
+    .card:hover .cover img{transform:scale(1.04)}
+    .feature .cover{min-height:clamp(220px,32vw,380px)}
+    /* horizontal card: cover left, text right */
+    .card.row{flex-direction:row}
+    .card.row .cover{border-bottom:0;border-right:1.5px solid var(--ink);flex:1.3;min-height:180px}
+    .card.row .card-body{flex:1;align-self:center}
 
-    /* text-cover fallback (used until a project has a real image/GIF) */
-    .tc{width:100%;height:100%;display:flex;flex-direction:column;justify-content:center;padding:1.2rem;gap:.4rem}
-    .tc-mono{font-family:Menlo,Consolas,monospace;font-size:.62rem;letter-spacing:.08em;opacity:.6}
-    .tc-title{font-size:clamp(1.2rem,3vw,1.7rem);font-weight:800;letter-spacing:-.02em;line-height:1.15}
+    .tc{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;padding:1.2rem;gap:.5rem}
+    .tc-mono{font-family:var(--mono);font-size:.7rem;letter-spacing:.04em;min-height:1.2em}
+    .tc-mono::before{content:'› ';opacity:.6}
+    .tc-mono.typing::after{content:'▍';animation:blink .8s infinite}
+    .tc-title{font-size:clamp(1.6rem,3.6vw,2.6rem);font-weight:800;letter-spacing:-.04em;line-height:.95}
+    .s2 .tc-title{font-size:clamp(1.3rem,2.6vw,1.8rem)}
     .tc.ink{background:var(--ink);color:var(--bg)}
-    .tc.lemon{background:var(--lemon);color:var(--ink)}
-    .tc.paper{background:#f0f0ee;color:var(--ink)}
+    .tc.ink .tc-mono{color:var(--lemon)}
+    .tc.lemon{background:var(--lemon)}
+    .tc.paper{background:#efefeb;background-image:radial-gradient(rgba(10,10,10,.14) 1px,transparent 1px);background-size:14px 14px}
+    .tc .big-glyph{position:absolute;right:-.05em;top:-.2em;font-size:9rem;font-weight:800;line-height:1;opacity:.08;pointer-events:none}
 
-    /* play badge — add inside .cover when a card links to a video */
-    .play{position:absolute;right:.7rem;bottom:.7rem;width:34px;height:34px;border-radius:50%;background:rgba(10,10,10,.8);display:flex;align-items:center;justify-content:center}
-    .play::after{content:'';border-style:solid;border-width:6px 0 6px 10px;border-color:transparent transparent transparent var(--lemon);margin-left:2px}
+    .play{position:absolute;right:.8rem;bottom:.8rem;width:40px;height:40px;border-radius:50%;background:rgba(10,10,10,.85);display:flex;align-items:center;justify-content:center}
+    .play::after{content:'';border-style:solid;border-width:7px 0 7px 12px;border-color:transparent transparent transparent var(--lemon);margin-left:3px}
+    .badge{position:absolute;left:.8rem;top:.8rem;font-family:var(--mono);font-size:.6rem;letter-spacing:.14em;background:var(--lemon);border:1.5px solid var(--ink);padding:.25rem .5rem;font-weight:700}
 
-    .card-body{padding:.9rem 1rem 1.1rem}
-    .tag{display:inline-block;font-family:Menlo,Consolas,monospace;font-size:.58rem;letter-spacing:.14em;padding:.2rem .5rem;margin-bottom:.5rem;background:var(--lemon);color:var(--ink);font-weight:700}
-    .card-title{font-size:1.05rem;font-weight:800;margin-bottom:.3rem}
-    .card-desc{font-size:.82rem;line-height:1.55;color:var(--gray)}
-    .inhouse{position:absolute;right:.7rem;bottom:.6rem;font-family:Menlo,monospace;font-size:.55rem;letter-spacing:.12em;color:var(--gray);text-transform:uppercase}
+    .card-body{padding:1rem 1.1rem 1.2rem}
+    .tag{display:inline-block;font-family:var(--mono);font-size:.58rem;letter-spacing:.14em;padding:.2rem .5rem;margin-bottom:.55rem;background:var(--ink);color:var(--lemon);font-weight:700}
+    .card-title{font-size:1.1rem;font-weight:800;letter-spacing:-.01em;margin-bottom:.3rem}
+    .feature .card-title{font-size:clamp(1.2rem,2.4vw,1.6rem);letter-spacing:-.02em}
+    .card-desc{font-size:.84rem;line-height:1.55;color:var(--gray)}
 
-    /* --- compact mode (demo pending) ---
-       后门开关：卡片 class 加 "mini" 即隐藏封面、缩小尺寸并显示 DEMO COMING SOON。
-       未来某项目有了截图/GIF/视频：
-       1. 去掉该卡片 class 里的 "mini"
-       2. 把 .cover 里的注释占位换成 <img src="assets/xxx.jpg"> 或 .tc 文字封面
-       3. 如需跳转，把 <div class="card"> 换成 <a class="card" href="...">
-       即恢复正常大小卡片。 */
-    .card.mini .cover{display:none}
-    .card.mini{box-shadow:2px 2px 0 var(--ink)}
-    .card.mini .card-body{padding:.7rem .9rem 1.5rem}
-    .card.mini .card-title{font-size:.92rem}
-    .card.mini .card-desc{font-size:.75rem}
-    .card.mini .tag{font-size:.52rem;padding:.15rem .4rem;margin-bottom:.35rem}
-    .card.mini .inhouse{color:var(--ink);background:var(--lemon);padding:.1rem .4rem}
+    /* ---------- Workbench marquee (demo pending projects) ---------- */
+    .bench{border-top:3px solid var(--ink);border-bottom:3px solid var(--ink);background:var(--ink);margin:0 calc(50% - 50vw) clamp(3rem,7vw,5rem);padding:1.6rem 0;overflow:hidden}
+    .bench-head{max-width:1120px;margin:0 auto 1.2rem;padding:0 clamp(1.2rem,4vw,2.5rem);display:flex;justify-content:space-between;align-items:baseline;color:var(--bg)}
+    .bench-title{font-size:clamp(1.4rem,3.5vw,2.2rem);font-weight:800;letter-spacing:-.03em}
+    .bench-title mark{background:var(--lemon);padding:0 .25em}
+    .bench-sub{font-family:var(--mono);font-size:.7rem;color:#aaa;letter-spacing:.1em;text-transform:uppercase}
+    .track{display:flex;gap:1.2rem;width:max-content;animation:scroll 50s linear infinite;padding:0 .6rem}
+    .bench:hover .track{animation-play-state:paused}
+    @keyframes scroll{to{transform:translateX(-50%)}}
+    .ticket{width:280px;flex-shrink:0;background:var(--card);padding:1.1rem 1.1rem 1.4rem;position:relative;font-size:.8rem;transform:rotate(var(--r,0deg));transition:transform .2s}
+    .ticket:nth-child(odd){--r:-1.2deg}.ticket:nth-child(even){--r:1deg}
+    .ticket:hover{transform:rotate(0) translateY(-4px)}
+    .ticket::after{content:'';position:absolute;left:0;right:0;bottom:-8px;height:8px;background:conic-gradient(from -45deg at bottom,var(--card) 90deg,transparent 0) 0 0/16px 100%}
+    .ticket .tag{background:var(--lemon);color:var(--ink)}
+    .ticket h3{font-size:1rem;font-weight:800;margin-bottom:.35rem}
+    .ticket p{color:var(--gray);line-height:1.5;font-size:.76rem}
+    .stamp{position:absolute;right:.8rem;top:.8rem;font-family:var(--mono);font-size:.55rem;letter-spacing:.12em;font-weight:700;border:1.5px solid #d6232a;color:#d6232a;padding:.15rem .35rem;transform:rotate(8deg);text-transform:uppercase}
 
-    /* --- Footer --- */
-    .footer{display:flex;justify-content:space-between;padding-top:1rem;border-top:1px solid var(--rule);font-size:.7rem;font-family:Menlo,monospace;color:var(--gray)}
-    .footer a{color:var(--gray);text-decoration:none}
-    .footer a:hover{color:var(--ink)}
+    /* ---------- Footer ---------- */
+    .footer{display:flex;justify-content:space-between;align-items:end;gap:1rem;padding-top:1rem;border-top:3px solid var(--ink)}
+    .footer-big{font-size:clamp(2rem,7vw,5rem);font-weight:800;letter-spacing:-.05em;line-height:.9}
+    .footer-big mark{background:var(--lemon)}
+    .footer-meta{font-family:var(--mono);font-size:.7rem;color:var(--gray);text-align:right;line-height:1.8}
+    .footer-meta a{color:var(--gray)}
 
-    @media(max-width:480px){
-      .header{flex-direction:column;text-align:center}
-      .footer{flex-direction:column;gap:.3rem;text-align:center}
+    /* ---------- Scroll reveal ---------- */
+    .rv{opacity:0;transform:translateY(24px);transition:opacity .6s,transform .6s}
+    .rv.in{opacity:1;transform:none}
+
+    @media(max-width:860px){
+      .about{grid-template-columns:minmax(0,1fr)}
+      .grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+      .s2,.s3{grid-column:span 1}.s4,.s6{grid-column:span 2}
+      .card.row{flex-direction:column}
+      .card.row .cover{border-right:0;border-bottom:1.5px solid var(--ink)}
+    }
+    @media(max-width:560px){
+      .grid{grid-template-columns:minmax(0,1fr)}
+      .s2,.s3,.s4,.s6{grid-column:span 1}
+      .cover:has(.tc){min-height:150px}
+      .hero{grid-template-columns:1fr}
+      .avatar{position:absolute;right:1.2rem;top:3.2rem;width:92px}
+      .stats{grid-template-columns:1fr 1fr 1fr}
+      .stat-lbl{font-size:.58rem}
+      .footer{flex-direction:column;align-items:start}
+      .footer-meta{text-align:left}
+    }
+    @media(prefers-reduced-motion:reduce){
+      *,*::before,*::after{animation:none!important;transition:none!important}
+      .rv,.r-line{opacity:1;transform:none}
+      .bench{overflow-x:auto}
     }
   </style>
 </head>
 <body>
   <div class="page">
 
-    <header class="header">
-      <div class="avatar">PL</div>
-      <div class="header-text">
-        <div class="header-name">Pohan Lee</div>
-        <div class="header-tag">one-man ecommerce company <b>&times;</b> ai toolmaker</div>
+    <div class="topbar">
+      <span><span class="dot"></span>agents on duty</span>
+      <span>index · 2026</span>
+    </div>
+
+    <header class="hero" style="position:relative">
+      <h1 class="name"><span>Pohan</span><span class="l2">Lee</span></h1>
+      <!-- 插画头像（SVG，可替换） -->
+      <div class="avatar" aria-label="Pohan Lee illustrated avatar">
+        <svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+          <rect width="120" height="120" fill="#FFD500"/>
+          <g stroke="#0a0a0a" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round">
+            <!-- receipt floating behind -->
+            <path d="M84 14 h22 v30 l-3.6 -3 l-3.6 3 l-3.6 -3 l-3.6 3 l-3.6 -3 l-4 3 z" fill="#fff" transform="rotate(12 95 30)"/>
+            <path d="M88 22 h14 M88 28 h10 M88 34 h12" transform="rotate(12 95 30)" stroke-width="1.6"/>
+            <!-- hoodie -->
+            <path d="M14 122 C16 96 34 86 60 86 C86 86 104 96 106 122 Z" fill="#0a0a0a"/>
+            <path d="M48 87 L60 101 L72 87" fill="none" stroke="#fafaf8" stroke-width="2"/>
+            <!-- neck -->
+            <path d="M52 76 v11 h16 v-11" fill="#fafaf8"/>
+            <!-- head -->
+            <ellipse cx="60" cy="58" rx="22" ry="25" fill="#fafaf8"/>
+            <!-- hair -->
+            <path d="M37 57 C34 34 48 26 61 27 C78 27 87 38 83 58 C80 47 74 42 66 41 C60 45 50 46 43 44 C40 48 38 52 37 57 Z" fill="#0a0a0a"/>
+            <!-- headphones -->
+            <path d="M33 60 C30 26 90 26 87 60" fill="none" stroke-width="4"/>
+            <rect x="29" y="55" width="9" height="15" rx="4" fill="#FFD500"/>
+            <rect x="82" y="55" width="9" height="15" rx="4" fill="#FFD500"/>
+            <!-- face -->
+            <path d="M50 60 q3 -3 6 0 M64 60 q3 -3 6 0" fill="none"/>
+            <path d="M53 70 Q60 76 67 70" fill="none"/>
+            <circle cx="47" cy="67" r="2.6" fill="#ffb3a7" stroke="none"/>
+            <circle cx="73" cy="67" r="2.6" fill="#ffb3a7" stroke="none"/>
+          </g>
+          <!-- sparkle -->
+          <path d="M18 24 l2.5 6 l6 2.5 l-6 2.5 l-2.5 6 l-2.5 -6 l-6 -2.5 l6 -2.5 z" fill="#0a0a0a"/>
+        </svg>
       </div>
     </header>
 
-    <p class="bio">
-      I run a cross-border ecommerce business &mdash; <em>solo</em>. What used to take a team of five,
-      I ship with an AI toolchain I built myself: customer-service copilots, listing automation,
-      a Feishu agent that runs daily ops while I sleep. <span class="stat">100+ projects</span> in the
-      workshop, the best of them below. I also host build weekends under
-      <em>"This Should Work / 野生产品部"</em>. Everything here runs a real business.
-      Nothing is theoretical.
-    </p>
+    <p class="tagline">One-man ecommerce company <mark>&times; AI toolmaker</mark></p>
 
-    <div class="section-label">Where to find me</div>
-    <nav class="links">
-      <a class="link" href="https://github.com/Phat-Po" target="_blank" rel="noopener">
-        <span class="link-desc">open source &amp; experiments</span>
-        <span class="link-right">
-          <svg class="link-logo" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
-          <span class="link-name">GitHub</span>
-          <span class="link-arrow">&rarr;</span>
-        </span>
-      </a>
-      <a class="link" href="https://www.xiaohongshu.com/user/profile/631af8e4000000002303fa6d" target="_blank" rel="noopener">
-        <span class="link-desc">daily builds &amp; vibe coding life</span>
-        <span class="link-right">
-          <svg class="link-logo" viewBox="0 0 24 24"><rect width="24" height="24" rx="6" fill="#ff2442"/><text x="12" y="16.2" text-anchor="middle" font-family="PingFang SC,sans-serif" font-size="10" font-weight="700" fill="#fff">红</text></svg>
-          <span class="link-name">小红书</span>
-          <span class="link-arrow">&rarr;</span>
-        </span>
-      </a>
-    </nav>
+    <div class="stats">
+      <div class="stat"><div class="stat-num" data-count="100">100+</div><div class="stat-lbl">projects shipped</div></div>
+      <div class="stat"><div class="stat-num">1</div><div class="stat-lbl">human on payroll</div></div>
+      <div class="stat"><div class="stat-num">24/7</div><div class="stat-lbl">ai agents on duty</div></div>
+    </div>
 
-    <div class="section-label">Projects</div>
+    <section class="about">
+      <div>
+        <div class="section-label">Receipt</div>
+        <div class="printer">
+          <div class="receipt-wrap">
+            <div class="receipt" id="receipt">
+              <div class="r-line r-center r-title">THIS SHOULD WORK</div>
+              <div class="r-line r-center">野生产品部 · ONE-MAN CO.</div>
+              <div class="r-line r-center">#2026 ── POHAN LEE</div>
+              <div class="r-line r-sep"></div>
+              <div class="r-line r-row"><span class="k">Customer service</span><span class="fill"></span><span class="v">AI copilot</span></div>
+              <div class="r-line r-row"><span class="k">Listings</span><span class="fill"></span><span class="v">automated</span></div>
+              <div class="r-line r-row"><span class="k">Daily ops</span><span class="fill"></span><span class="v">Feishu agent</span></div>
+              <div class="r-line r-row"><span class="k">Projects</span><span class="fill"></span><span class="v">100+</span></div>
+              <div class="r-line r-row"><span class="k">Build weekends</span><span class="fill"></span><span class="v">hosted</span></div>
+              <div class="r-line r-sep"></div>
+              <div class="r-line r-row r-total"><span class="k">TEAM OF 5</span><span class="fill"></span><span class="v">1 HUMAN</span></div>
+              <div class="r-line r-sep"></div>
+              <div class="r-line r-note">Everything here runs a <b>real business</b>. Nothing is theoretical.</div>
+              <div class="r-line barcode"></div>
+              <div class="r-line r-center">*** THANK YOU · COME AGAIN ***</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="rv">
+        <div class="section-label">Where to find me</div>
+        <nav class="links">
+          <a class="link" href="https://github.com/Phat-Po" target="_blank" rel="noopener">
+            <span class="link-left">
+              <svg class="link-logo" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
+              <span><span class="link-name">GitHub</span><br><span class="link-desc">open source &amp; experiments</span></span>
+            </span>
+            <span class="link-arrow">&rarr;</span>
+          </a>
+          <a class="link" href="https://www.xiaohongshu.com/user/profile/631af8e4000000002303fa6d" target="_blank" rel="noopener">
+            <span class="link-left">
+              <svg class="link-logo" viewBox="0 0 24 24"><rect width="24" height="24" rx="6" fill="#ff2442"/><text x="12" y="16.2" text-anchor="middle" font-family="PingFang SC,sans-serif" font-size="10" font-weight="700" fill="#fff">红</text></svg>
+              <span><span class="link-name">小红书</span><br><span class="link-desc">daily builds &amp; vibe coding life</span></span>
+            </span>
+            <span class="link-arrow">&rarr;</span>
+          </a>
+        </nav>
+        <p class="pitch">
+          I run a cross-border ecommerce business &mdash; <em>solo</em>. What used to take a team of five,
+          I ship with an AI toolchain I built myself. I also host build weekends under
+          <em>"This Should Work / 野生产品部"</em> &mdash; ridiculous ideas, working demos.
+        </p>
+      </div>
+    </section>
+
+    <div class="section-label">Selected work</div>
     <div class="grid">
 
-      <a class="card wide" href="http://xhslink.com/o/6jj64rH4gIV" target="_blank" rel="noopener">
-        <div class="cover"><img src="assets/event-cover.jpg" alt="This Should Work 线下 Vibe Coder 交流会现场"></div>
+      <a class="card s4 feature rv" href="http://xhslink.com/o/6jj64rH4gIV" target="_blank" rel="noopener">
+        <div class="cover"><img src="assets/event-cover.jpg" alt="This Should Work 线下 Vibe Coder 交流会现场"><span class="badge">EVENT · SHANGHAI</span></div>
         <div class="card-body">
-          <span class="tag">EVENT</span>
           <div class="card-title">This Should Work &middot; 线下 Vibe Coder 交流会</div>
-          <div class="card-desc">20 vibe coders, 10+ live demos, 6 hours of non-stop show &amp; tell in Shanghai. Ridiculous ideas, working demos.</div>
+          <div class="card-desc">20 vibe coders, 10+ live demos, 6 hours of non-stop show &amp; tell. Ridiculous ideas, working demos.</div>
         </div>
       </a>
 
-      <a class="card" href="https://github.com/Phat-Po/whisperkey-mac" target="_blank" rel="noopener">
-        <div class="cover"><div class="tc lemon">
-          <div class="tc-mono">$ hold &#8997; &rarr; speak &rarr; paste</div>
+      <a class="card s2 feature rv" href="http://xhslink.com/o/A0xezrUhAPO" target="_blank" rel="noopener">
+        <div class="cover"><img src="assets/idea-ticket-printer.gif?v=2" alt="Idea Ticket Printer 现场打印名牌"><div class="play"></div></div>
+        <div class="card-body">
+          <span class="tag">TOOL</span>
+          <div class="card-title">Idea Ticket Printer</div>
+          <div class="card-desc">A cheap old thermal printer revived with vibe coding &mdash; speak or type, and your idea prints as a name tag.</div>
+        </div>
+      </a>
+
+      <a class="card s3 rv" href="https://github.com/Phat-Po/whisperkey-mac" target="_blank" rel="noopener">
+        <div class="cover"><div class="tc lemon"><span class="big-glyph">&#8997;</span>
+          <div class="tc-mono">hold &#8997; &rarr; speak &rarr; paste</div>
           <div class="tc-title">WhisperKey</div>
         </div></div>
         <div class="card-body">
@@ -187,33 +307,9 @@
         </div>
       </a>
 
-      <a class="card" href="http://xhslink.com/o/A0xezrUhAPO" target="_blank" rel="noopener">
-        <div class="cover">
-          <img src="assets/idea-ticket-printer.gif?v=2" alt="Idea Ticket Printer 现场打印名牌">
-          <div class="play"></div>
-        </div>
-        <div class="card-body">
-          <span class="tag">TOOL</span>
-          <div class="card-title">Idea Ticket Printer</div>
-          <div class="card-desc">A cheap old thermal printer revived with vibe coding &mdash; speak or type, and your idea prints instantly as a name tag or post-it card.</div>
-        </div>
-      </a>
-
-      <a class="card" href="https://github.com/Phat-Po/ai-thinking-journal" target="_blank" rel="noopener">
-        <div class="cover"><div class="tc lemon">
-          <div class="tc-mono">ai coding sessions &rarr; daily journal</div>
-          <div class="tc-title">AI Thinking Journal</div>
-        </div></div>
-        <div class="card-body">
-          <span class="tag">TOOL</span>
-          <div class="card-title">Daily Thinking Summary</div>
-          <div class="card-desc">Automatically distills every day's AI-assisted work into a written thinking journal.</div>
-        </div>
-      </a>
-
-      <a class="card" href="https://github.com/Phat-Po/link-grabber" target="_blank" rel="noopener">
-        <div class="cover"><div class="tc ink">
-          <div class="tc-mono">$ grab &lt;url&gt; &rarr; context.md</div>
+      <a class="card s3 rv" href="https://github.com/Phat-Po/link-grabber" target="_blank" rel="noopener">
+        <div class="cover"><div class="tc ink"><span class="big-glyph">$</span>
+          <div class="tc-mono">grab &lt;url&gt; &rarr; context.md</div>
           <div class="tc-title">Link Grabber</div>
         </div></div>
         <div class="card-body">
@@ -223,20 +319,44 @@
         </div>
       </a>
 
-      <a class="card" href="https://github.com/Phat-Po/agent-handoff-skill" target="_blank" rel="noopener">
+      <a class="card s2 rv" href="https://github.com/Phat-Po/ai-thinking-journal" target="_blank" rel="noopener">
+        <div class="cover"><div class="tc paper">
+          <div class="tc-mono">ai sessions &rarr; daily journal</div>
+          <div class="tc-title">AI Thinking Journal</div>
+        </div></div>
+        <div class="card-body">
+          <span class="tag">TOOL</span>
+          <div class="card-title">Daily Thinking Summary</div>
+          <div class="card-desc">Distills every day's AI-assisted work into a written thinking journal.</div>
+        </div>
+      </a>
+
+      <a class="card s2 rv" href="https://github.com/Phat-Po/agent-handoff-skill" target="_blank" rel="noopener">
         <div class="cover"><div class="tc lemon">
-          <div class="tc-mono">claude code &#8646; codex &middot; STATUS.md</div>
-          <div class="tc-title">Agent Handoff Skill</div>
+          <div class="tc-mono">claude code &#8646; codex</div>
+          <div class="tc-title">Agent Handoff</div>
         </div></div>
         <div class="card-body">
           <span class="tag">SKILL</span>
           <div class="card-title">Agent Handoff Skill</div>
-          <div class="card-desc">Cross-tool handoff skill for Claude Code &amp; Codex &mdash; minimal-token context passing between agents.</div>
+          <div class="card-desc">Minimal-token context passing between Claude Code &amp; Codex.</div>
         </div>
       </a>
 
-      <a class="card" href="https://github.com/Phat-Po/20260324__extension__wechat-article-summary" target="_blank" rel="noopener">
+      <a class="card s2 rv" href="https://github.com/Phat-Po/reddit-summarizer" target="_blank" rel="noopener">
         <div class="cover"><div class="tc ink">
+          <div class="tc-mono">TL;DR any thread</div>
+          <div class="tc-title">Reddit Summarizer</div>
+        </div></div>
+        <div class="card-body">
+          <span class="tag">EXTENSION</span>
+          <div class="card-title">Reddit Summarizer</div>
+          <div class="card-desc">AI-summarizes Reddit posts and comment threads in real time.</div>
+        </div>
+      </a>
+
+      <a class="card s6 row rv" href="https://github.com/Phat-Po/20260324__extension__wechat-article-summary" target="_blank" rel="noopener">
+        <div class="cover"><div class="tc paper">
           <div class="tc-mono">wechat &rarr; obsidian &middot; ai summary &middot; search</div>
           <div class="tc-title">Article Vault</div>
         </div></div>
@@ -246,106 +366,67 @@
           <div class="card-desc">A personal knowledge vault for WeChat articles &mdash; one-key save to Obsidian with AI summaries, sync &amp; digest. More library than bookmark.</div>
         </div>
       </a>
-
-      <a class="card" href="https://github.com/Phat-Po/reddit-summarizer" target="_blank" rel="noopener">
-        <div class="cover"><div class="tc paper">
-          <div class="tc-mono">TL;DR any thread &middot; streaming</div>
-          <div class="tc-title">Reddit Summarizer</div>
-        </div></div>
-        <div class="card-body">
-          <span class="tag">EXTENSION</span>
-          <div class="card-title">Reddit Summarizer</div>
-          <div class="card-desc">Chrome extension that AI-summarizes Reddit posts and comment threads in real time.</div>
-        </div>
-      </a>
-
-      <!-- ===== 以下为紧凑卡（demo pending）。恢复方法见 CSS 里 "compact mode" 注释 ===== -->
-
-      <div class="card mini">
-        <div class="cover"><div class="tc ink">
-          <div class="tc-mono">feishu &middot; websocket &middot; tool calling</div>
-          <div class="tc-title">全能飞书 Agent</div>
-        </div></div>
-        <div class="card-body">
-          <span class="tag">AGENT</span>
-          <div class="card-title">全能飞书 Agent 智能体</div>
-          <div class="card-desc">An all-round Feishu AI agent: answers queries, writes daily reports, builds Base tables &amp; docs, and assigns tasks to teammates &mdash; on duty 24/7.</div>
-          <span class="inhouse">demo coming soon</span>
-        </div>
-      </div>
-
-      <div class="card mini">
-        <div class="cover"><div class="tc paper">
-          <div class="tc-mono">chrome extension &middot; ecommerce seller console</div>
-          <div class="tc-title">AI Reply Assistant</div>
-        </div></div>
-        <div class="card-body">
-          <span class="tag">EXTENSION</span>
-          <div class="card-title">Ecommerce AI Reply Assistant</div>
-          <div class="card-desc">Generates customer-service replies right inside the seller console &mdash; built for ecommerce sellers, used daily in my own store.</div>
-          <span class="inhouse">demo coming soon</span>
-        </div>
-      </div>
-
-      <div class="card mini">
-        <div class="cover"><div class="tc ink">
-          <div class="tc-mono">scan 100+ folders &rarr; kanban</div>
-          <div class="tc-title">Vibe Project Dashboard</div>
-        </div></div>
-        <div class="card-body">
-          <span class="tag">TOOL</span>
-          <div class="card-title">Vibe Project Dashboard</div>
-          <div class="card-desc">Scans my whole AI-coding workspace and renders a live kanban of every project's health.</div>
-          <span class="inhouse">demo coming soon</span>
-        </div>
-      </div>
-
-      <div class="card mini">
-        <div class="cover"><div class="tc paper">
-          <div class="tc-mono">gemini api &middot; batch listing images</div>
-          <div class="tc-title">Main Image Generator</div>
-        </div></div>
-        <div class="card-body">
-          <span class="tag">TOOL</span>
-          <div class="card-title">Ecommerce Main Image Generator</div>
-          <div class="card-desc">Batch-generates platform-compliant ecommerce listing images with Gemini.</div>
-          <span class="inhouse">demo coming soon</span>
-        </div>
-      </div>
-
-      <div class="card mini">
-        <div class="cover"><div class="tc lemon">
-          <div class="tc-mono">bazi charting &middot; plain-english reading</div>
-          <div class="tc-title">Bazi Reading</div>
-        </div></div>
-        <div class="card-body">
-          <span class="tag">WEB</span>
-          <div class="card-title">Bazi Reading for Westerners</div>
-          <div class="card-desc">A mobile-first web tool that casts your Chinese bazi chart and reads it in plain English &mdash; ancient system, modern self-discovery.</div>
-          <span class="inhouse">demo coming soon</span>
-        </div>
-      </div>
-
-      <div class="card mini">
-        <div class="cover"><div class="tc ink">
-          <div class="tc-mono">disk &middot; memory &middot; cpu &middot; vpn &middot; ai usage</div>
-          <div class="tc-title">MacHealth+</div>
-        </div></div>
-        <div class="card-body">
-          <span class="tag">TOOL</span>
-          <div class="card-title">MacHealth+</div>
-          <div class="card-desc">A background sentinel for macOS &mdash; watches disk, memory, CPU, thermal, VPN traffic &amp; AI usage, and warns you before problems waste your time.</div>
-          <span class="inhouse">demo coming soon</span>
-        </div>
-      </div>
-
     </div>
-
-    <footer class="footer">
-      <span>Built with AI</span>
-      <a href="https://github.com/Phat-Po" target="_blank">&copy; 2026 Pohan Lee</a>
-    </footer>
-
   </div>
+
+  <!-- 工作台跑马灯：还没有 demo 的项目。有了 demo 就挪进上面的 grid -->
+  <section class="bench">
+    <div class="bench-head">
+      <div class="bench-title">On the <mark>workbench</mark></div>
+      <div class="bench-sub">in daily use · demo coming soon</div>
+    </div>
+    <div class="track" id="track">
+      <div class="ticket"><span class="stamp">demo soon</span><span class="tag">AGENT</span><h3>全能飞书 Agent 智能体</h3><p>Answers queries, writes daily reports, builds Base tables &amp; docs, assigns tasks &mdash; on duty 24/7.</p></div>
+      <div class="ticket"><span class="stamp">demo soon</span><span class="tag">EXTENSION</span><h3>Ecommerce AI Reply Assistant</h3><p>Customer-service replies right inside the seller console &mdash; used daily in my own store.</p></div>
+      <div class="ticket"><span class="stamp">demo soon</span><span class="tag">TOOL</span><h3>Vibe Project Dashboard</h3><p>Scans my whole AI-coding workspace and renders a live kanban of every project's health.</p></div>
+      <div class="ticket"><span class="stamp">demo soon</span><span class="tag">TOOL</span><h3>Ecommerce Main Image Generator</h3><p>Batch-generates platform-compliant listing images with Gemini.</p></div>
+      <div class="ticket"><span class="stamp">demo soon</span><span class="tag">WEB</span><h3>Bazi Reading for Westerners</h3><p>Casts your Chinese bazi chart and reads it in plain English.</p></div>
+      <div class="ticket"><span class="stamp">demo soon</span><span class="tag">TOOL</span><h3>MacHealth+</h3><p>A background sentinel for macOS &mdash; warns you before disk, memory or VPN problems waste your time.</p></div>
+    </div>
+  </section>
+
+  <div class="page" style="padding-top:0">
+    <footer class="footer">
+      <div class="footer-big">This should <mark>work.</mark></div>
+      <div class="footer-meta">Built with AI, by one human<br><a href="https://github.com/Phat-Po" target="_blank" rel="noopener">&copy; 2026 Pohan Lee</a></div>
+    </footer>
+  </div>
+
+  <script>
+    const still = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // receipt prints line by line
+    const lines = document.querySelectorAll('#receipt .r-line');
+    lines.forEach((l, i) => still ? l.classList.add('on') : setTimeout(() => l.classList.add('on'), 400 + i * 120));
+
+    // duplicate tickets for a seamless marquee loop
+    const track = document.getElementById('track');
+    if (!still) track.innerHTML += track.innerHTML;
+
+    // terminal-style typing on text covers
+    function type(el) {
+      if (still || el.dataset.busy) return;
+      const text = el.dataset.text ??= el.textContent;
+      el.dataset.busy = 1; el.textContent = ''; el.classList.add('typing');
+      let i = 0;
+      const t = setInterval(() => {
+        el.textContent = text.slice(0, ++i);
+        if (i >= text.length) { clearInterval(t); delete el.dataset.busy; setTimeout(() => el.classList.remove('typing'), 1200); }
+      }, 35);
+    }
+    document.querySelectorAll('.card').forEach(c => {
+      const m = c.querySelector('.tc-mono');
+      if (m) c.addEventListener('mouseenter', () => type(m));
+    });
+
+    // scroll reveal (+ type once when a card first appears)
+    const io = new IntersectionObserver(es => es.forEach(e => {
+      if (!e.isIntersecting) return;
+      e.target.classList.add('in');
+      const m = e.target.querySelector('.tc-mono'); if (m) type(m);
+      io.unobserve(e.target);
+    }), { threshold: .15 });
+    document.querySelectorAll('.rv').forEach(el => io.observe(el));
+  </script>
 </body>
 </html>
